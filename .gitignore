@@ -144,3 +144,12 @@ cython_debug/
 
 # End of https://www.toptal.com/developers/gitignore/api/python
 .typings
+Soft
+account.py
+typings
+nemo_alchemy/__init__.py
+nemo_alchemy/test.py
+if_not_find.xlsx
+info.xlsx
+info11.xlsx
+
