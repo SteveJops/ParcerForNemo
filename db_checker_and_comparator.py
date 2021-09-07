@@ -101,7 +101,7 @@ def db_check_info_and_add(profile_data: tuple):
                             print(e)
 
                 else:
-                    # if inn doesn`t exist or wrong that adds it to this dict 
+                    # if inn doesn`t exist or wrong that adds it to this dict
                     dict_data_with_not_find['profile_inn'] = profile_inn
                     # df1 = df1.append(pd.DataFrame(dict_data_with_not_find, index=range(len(df1), len(df1) + len(dict_data_with_not_find))))
             index += 1
