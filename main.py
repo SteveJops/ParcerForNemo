@@ -1,12 +1,13 @@
 from piranha_checker_and_comparator import compare_data_and_add, get_data
-# from parcer import extract_data
-from db_checker_and_comparator import parse_data_from_file, db_check_info_and_add
+from parcer import extract_data
+from db_checker_and_comparator import parse_data_from_file
+from db_checker_and_comparator import db_check_info_and_add
 
 
 if __name__ == '__main__':
     path = 'C:\\Users\\analytic8\\Desktop\\ParcerForNemo\\Soft'
     path_to_excel = 'info.xlsx'
-    # extract_data(path)
+    extract_data(path)
     if path_to_excel:
         parsed_data = parse_data_from_file(path_to_excel)
         db_check_info_and_add(parsed_data)

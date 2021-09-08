@@ -13,7 +13,8 @@ def extract_data(path):
         path (str): this func is taken a str with path to files as argument
 
     Returns:
-        'info.xlsx': the func return a dataframe and a file with processed client data in excel tables file
+        'info.xlsx': the func return a dataframe and a file with processed
+        client data in excel tables file
     """
     try:
         df = pd.DataFrame()
@@ -33,16 +34,29 @@ def extract_data(path):
                             r = f.read()
                             # scraping the text info
                             text = rtf_to_text(r)
-                            # if file doesn`t has  the same name as folder it`s relative
+                            # if file doesn`t has  the same name as folder
+                            # it`s relative
                             if basename != dirname:
-                                dict_with_whole_data['client_parent_INN'] = text[:11]
-                                dict_with_whole_data['client_parent_PIB'] = text[13:45]
-                                dict_with_whole_data['relative_path'] = str(os.path.abspath(fl))
+                                dict_with_whole_data[
+                                    'client_parent_INN'
+                                    ] = text[:11]
+                                dict_with_whole_data[
+                                    'client_parent_PIB'
+                                    ] = text[13:45]
+                                dict_with_whole_data[
+                                    'relative_path'
+                                    ] = str(os.path.abspath(fl))
                             else:
                                 # These are clients
-                                dict_with_whole_data['client_INN'] = text[:11]
-                                dict_with_whole_data['client_PIB'] = text[13:45]
-                                dict_with_whole_data['path'] = str(os.path.abspath(fl))
+                                dict_with_whole_data[
+                                    'client_INN'
+                                    ] = text[:11]
+                                dict_with_whole_data[
+                                    'client_PIB'
+                                    ] = text[13:45]
+                                dict_with_whole_data[
+                                    'path'
+                                    ] = str(os.path.abspath(fl))
                     except Exception as e:
                         print(e)
                         # looking for files with this format
@@ -54,24 +68,40 @@ def extract_data(path):
                         files = zip_file.namelist()
                         # opening the file
                         with zip_file.open(files[0]) as f:
-                            # scraping the text and formating to normal-view text
+                            # scraping the text and formating
+                            # to normal-view text
                             text = rtf_to_text(TextIOWrapper(f).read())
                             # if file has the same name as folder it`s client
                             if basename == dirname:
-                                dict_with_whole_data['client_INN'] = text[:11]
-                                dict_with_whole_data['client_PIB'] = text[13:45]
-                                dict_with_whole_data['path'] = str(os.path.abspath(fl))
+                                dict_with_whole_data[
+                                    'client_INN'
+                                    ] = text[:11]
+                                dict_with_whole_data[
+                                    'client_PIB'
+                                    ] = text[13:45]
+                                dict_with_whole_data[
+                                    'path'
+                                    ] = str(os.path.abspath(fl))
                             else:
                                 # these are relatives
-                                dict_with_whole_data['client_parent_INN'] = text[:11]
-                                dict_with_whole_data['client_parent_PIB'] = text[13:45]
-                                dict_with_whole_data['relative_path'] = str(os.path.abspath(fl))
+                                dict_with_whole_data[
+                                    'client_parent_INN'
+                                    ] = text[:11]
+                                dict_with_whole_data[
+                                    'client_parent_PIB'
+                                    ] = text[13:45]
+                                dict_with_whole_data[
+                                    'relative_path'
+                                    ] = str(os.path.abspath(fl))
                     except Exception as e:
                         print(e)
                 else:
                     pass
             # adding to dataframe dict
-            df = df.append(pd.DataFrame(dict_with_whole_data, index=range(len(df), len(df) + len(dict_with_whole_data))))
+            df = df.append(pd.DataFrame(
+                dict_with_whole_data,
+                index=range(len(df), len(df) + len(dict_with_whole_data)))
+                )
         # df = df.drop_duplicates(subset=['path', 'relative_path'])
         # adding to excel
         df.to_excel("info.xlsx")
